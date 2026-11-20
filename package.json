@@ -2,16 +2,16 @@
   "name": "azalais-dark-theme",
   "displayName": "Azalais Dark",
   "description": "Dark theme made to reduce eye fatigue for Visual Studio Code",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "publisher": "ChristopherAlphonse",
   "license": "MIT",
-  "homepage": "https://github.com/ChristopherAlphonse/azalais-dark-",
+  "homepage": "https://github.com/ChristopherAlphonse/azalais-dark-theme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ChristopherAlphonse/azalais-dark-"
+    "url": "https://github.com/ChristopherAlphonse/azalais-dark-theme"
   },
   "bugs": {
-    "url": "https://github.com/ChristopherAlphonse/azalais-dark-/issues"
+    "url": "https://github.com/ChristopherAlphonse/azalais-dark-theme/issues"
   },
   "icon": "icon.png",
   "keywords": [
@@ -27,7 +27,9 @@
     "deuteranopia",
     "protanopia",
     "focus",
-    "minimal"
+    "minimal",
+    "color theme",
+    "dark"
   ],
   "galleryBanner": {
     "color": "#000058",
@@ -58,16 +60,13 @@
     ]
   },
   "scripts": {
-    "packaged": "vsce package && vsce publish"
+    "package": "vsce package -o azalais-dark-theme.vsix",
+    "release": "gh workflow run publish.yml --ref main -f bump=patch && sleep 3 && gh run watch $(gh run list --workflow publish.yml --limit 1 --json databaseId -q '.[0].databaseId')",
+    "release:minor": "gh workflow run publish.yml --ref main -f bump=minor",
+    "release:major": "gh workflow run publish.yml --ref main -f bump=major"
   },
-  "dependencies": {
-    "generator-code": "^1.11.13"
+  "devDependencies": {
+    "@vscode/vsce": "4.1.1"
   },
-  "badges": [
-    {
-      "url": "https://vsmarketplacebadges.dev/version/christopheralphonse.azalais-dark-theme.png",
-      "href": "https://marketplace.visualstudio.com/items/christopheralphonse.azalais-dark-theme",
-      "description": "Extension version"
-    }
-  ]
+  "pricing": "Free"
 }
